@@ -36,13 +36,16 @@ package io.microprofile.sample.swagger.rest;
  * #L%
  */
 
+import io.microprofile.sample.swagger.utils.QLogger;
 import io.microprofile.sample.swagger.utils.ResourceProducer;
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.container.test.api.RunAsClient;
 import org.jboss.arquillian.junit.Arquillian;
 import org.jboss.arquillian.test.api.ArquillianResource;
+import org.jboss.shrinkwrap.api.Archive;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
 import org.jboss.shrinkwrap.api.asset.EmptyAsset;
+import org.jboss.shrinkwrap.api.spec.JavaArchive;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.shrinkwrap.resolver.api.maven.Maven;
 import org.junit.Before;
@@ -79,20 +82,25 @@ public class TopCDsEndpointTest {
     // =         Deployment methods         =
     // ======================================
 
-    @Deployment(testable = false)
-    public static WebArchive createDeployment() {
+    @Deployment
+    public static Archive<?> createDeployment() {
+        if(System.getProperty("arquillian.launch","").equals("arquillian-hammock")) {
+            return ShrinkWrap.create(JavaArchive.class).addClasses(RestApplication.class, TopCDsEndpoint.class,
+                    QLogger.class, ResourceProducer.class);
+        }
+        else {
+            // Import Maven runtime dependencies
+            File[] files = Maven.resolver().loadPomFromFile("pom.xml")
+                    .importRuntimeDependencies().resolve().withTransitivity().asFile();
 
-        // Import Maven runtime dependencies
-        File[] files = Maven.resolver().loadPomFromFile("pom.xml")
-                .importRuntimeDependencies().resolve().withTransitivity().asFile();
-
-        return ShrinkWrap
-                .create(WebArchive.class)
-                .addClass(RestApplication.class)
-                .addClass(TopCDsEndpoint.class)
-                .addClass(ResourceProducer.class)
-                .addAsWebInfResource(EmptyAsset.INSTANCE, "beans.xml")
-                .addAsLibraries(files);
+            return ShrinkWrap
+                    .create(WebArchive.class)
+                    .addClass(RestApplication.class)
+                    .addClass(TopCDsEndpoint.class)
+                    .addClass(ResourceProducer.class)
+                    .addAsWebInfResource(EmptyAsset.INSTANCE, "beans.xml")
+                    .addAsLibraries(files);
+        }
     }
 
     // ======================================

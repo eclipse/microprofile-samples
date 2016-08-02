@@ -13,4 +13,4 @@ target/
 .externalToolBuilders
 rebuild.sh
 nb-configuration.xml
-
+**/dependency-reduced-pom.xml

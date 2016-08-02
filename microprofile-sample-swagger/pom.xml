@@ -12,10 +12,15 @@
 
     <artifactId>swagger</artifactId>
     <version>1.0.0-SNAPSHOT</version>
-    <packaging>war</packaging>
+    <packaging>${packaging.type}</packaging>
     <name>Microprofile Samples :: Swagger</name>
 
     <dependencies>
+        <!-- JBoss Logging required due to older version from resteasy client -->
+        <dependency>
+            <groupId>org.jboss.logging</groupId>
+            <artifactId>jboss-logging</artifactId>
+        </dependency>
         <!-- JAVA EE -->
         <dependency>
             <groupId>javax</groupId>
@@ -91,6 +96,25 @@
                 <dependency>
                     <groupId>org.wildfly.swarm</groupId>
                     <artifactId>arquillian</artifactId>
+                    <scope>test</scope>
+                </dependency>
+            </dependencies>
+        </profile>
+        <profile>
+            <id>hammock</id>
+            <dependencies>
+                <dependency>
+                    <groupId>ws.ament.hammock</groupId>
+                    <artifactId>dist-microprofile</artifactId>
+                </dependency>
+                <dependency>
+                    <groupId>ws.ament.hammock</groupId>
+                    <artifactId>test-arquillian</artifactId>
+                    <scope>test</scope>
+                </dependency>
+                <dependency>
+                    <groupId>org.jboss.arquillian.container</groupId>
+                    <artifactId>arquillian-weld-embedded</artifactId>
                     <scope>test</scope>
                 </dependency>
             </dependencies>
