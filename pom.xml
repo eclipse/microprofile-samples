@@ -247,9 +247,6 @@
         </profile>
         <profile>
             <id>arquillian-wildfly-managed</id>
-            <activation>
-                <activeByDefault>true</activeByDefault>
-            </activation>
             <build>
                 <plugins>
                     <plugin>
