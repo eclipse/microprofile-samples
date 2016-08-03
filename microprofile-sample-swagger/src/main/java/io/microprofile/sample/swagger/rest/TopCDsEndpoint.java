@@ -1,5 +1,6 @@
 package io.microprofile.sample.swagger.rest;
 
+import io.microprofile.sample.swagger.utils.QLogger;
 import io.swagger.annotations.Api;
 
 import javax.inject.Inject;
@@ -19,6 +20,7 @@ import java.util.logging.Logger;
 public class TopCDsEndpoint {
 
     @Inject
+    @QLogger
     private Logger logger;
 
     @GET

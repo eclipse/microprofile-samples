@@ -1,5 +1,7 @@
 package io.microprofile.sample.canonical.rest;
 
+import io.microprofile.sample.canonical.utils.QLogger;
+
 import javax.inject.Inject;
 import javax.json.Json;
 import javax.json.JsonArrayBuilder;
@@ -16,6 +18,7 @@ import java.util.logging.Logger;
 public class TopCDsEndpoint {
 
     @Inject
+    @QLogger
     private Logger logger;
 
     @GET
