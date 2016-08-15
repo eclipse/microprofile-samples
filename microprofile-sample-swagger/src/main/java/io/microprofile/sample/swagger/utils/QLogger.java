@@ -16,17 +16,15 @@
  */
 package io.microprofile.sample.swagger.utils;
 
-import javax.enterprise.context.ApplicationScoped;
-import javax.enterprise.inject.Produces;
-import javax.enterprise.inject.spi.InjectionPoint;
-import java.util.logging.Logger;
+import javax.inject.Qualifier;
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Retention;
+import java.lang.annotation.Target;
 
-@ApplicationScoped
-public class ResourceProducer {
+import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
-    @Produces
-    @QLogger
-    public Logger produceLogger(final InjectionPoint injectionPoint) {
-        return Logger.getLogger(injectionPoint.getMember().getDeclaringClass().getName());
-    }
+@Qualifier
+@Retention(RUNTIME)
+@Target({ElementType.METHOD, ElementType.FIELD, ElementType.PARAMETER, ElementType.TYPE})
+public @interface QLogger {
 }
