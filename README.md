@@ -4,7 +4,7 @@
 
 Give different samples on the Micro Profile : 
 
-* **Canonical** Simplest sample using JAX-RS / CDI / JSon-P 
+* **Canonical** Simplest sample using JAX-RS 2.0 / CDI 1.2 / JSon-P 1.0
 * **Swagger** Adding Swagger to the canonical sample 
 
 ## Testing
