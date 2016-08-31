@@ -50,9 +50,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 import java.util.logging.Logger;
+import javax.enterprise.context.RequestScoped;
 
 @Path("/")
 @Api(description = "Top CDs Endpoint")
+@RequestScoped
 public class TopCDsEndpoint {
 
     @Inject

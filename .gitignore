@@ -12,4 +12,5 @@ target/
 .factorypath
 .externalToolBuilders
 rebuild.sh
+nb-configuration.xml
 
