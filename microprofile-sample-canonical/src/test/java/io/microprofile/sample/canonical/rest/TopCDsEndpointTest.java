@@ -44,7 +44,6 @@ import org.jboss.arquillian.test.api.ArquillianResource;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
 import org.jboss.shrinkwrap.api.asset.EmptyAsset;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
-import org.jboss.shrinkwrap.resolver.api.maven.Maven;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -54,7 +53,6 @@ import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import java.io.File;
 import java.net.URI;
 
 import static net.javacrumbs.jsonunit.fluent.JsonFluentAssert.assertThatJson;
@@ -82,17 +80,12 @@ public class TopCDsEndpointTest {
     @Deployment(testable = false)
     public static WebArchive createDeployment() {
 
-        // Import Maven runtime dependencies
-        File[] files = Maven.resolver().loadPomFromFile("pom.xml")
-                .importRuntimeDependencies().resolve().withTransitivity().asFile();
-
         return ShrinkWrap
                 .create(WebArchive.class)
                 .addClass(RestApplication.class)
                 .addClass(TopCDsEndpoint.class)
                 .addClass(ResourceProducer.class)
-                .addAsWebInfResource(EmptyAsset.INSTANCE, "beans.xml")
-                .addAsLibraries(files);
+                .addAsWebInfResource(EmptyAsset.INSTANCE, "beans.xml");
     }
 
     // ======================================

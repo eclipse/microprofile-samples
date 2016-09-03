@@ -28,10 +28,10 @@
         <!--Swarm-->
         <version.wildfly-swarm>1.0.0.Final</version.wildfly-swarm>
         <!-- Test -->
-        <version.arquillian>1.1.11.Final</version.arquillian>
+        <version.arquillian>1.0.0.Alpha3</version.arquillian>
         <version.arquillian.wildfly.remote>8.2.1.Final</version.arquillian.wildfly.remote>
         <version.arquillian.wildfly.managed>8.2.1.Final</version.arquillian.wildfly.managed>
-        <version.wildfly>10.0.0.Final</version.wildfly>
+        <version.wildfly>10.1.0.Final</version.wildfly>
         <version.junit>4.12</version.junit>
         <version.jsonunit>1.12.1</version.jsonunit>
         <version.jackson>2.3.1</version.jackson>
@@ -82,8 +82,8 @@
 
             <!-- TEST -->
             <dependency>
-                <groupId>org.jboss.arquillian</groupId>
-                <artifactId>arquillian-bom</artifactId>
+                <groupId>org.arquillian</groupId>
+                <artifactId>arquillian-universe</artifactId>
                 <version>${version.arquillian}</version>
                 <type>pom</type>
                 <scope>import</scope>
