@@ -26,7 +26,7 @@
         <version.resteasy>3.0.18.Final</version.resteasy>
         <version.swagger>1.5.9</version.swagger>
         <!--Swarm-->
-        <version.wildfly-swarm>1.0.0.Final</version.wildfly-swarm>
+        <version.wildfly-swarm>2016.10-SNAPSHOT</version.wildfly-swarm>
         <!-- Test -->
         <version.arquillian>1.0.0.Alpha3</version.arquillian>
         <version.arquillian.wildfly.remote>8.2.1.Final</version.arquillian.wildfly.remote>
@@ -67,7 +67,7 @@
             <!-- WILDFLY SWARM -->
             <dependency>
                 <groupId>org.wildfly.swarm</groupId>
-                <artifactId>bom</artifactId>
+                <artifactId>bom-all</artifactId>
                 <version>${version.wildfly-swarm}</version>
                 <type>pom</type>
                 <scope>import</scope>
