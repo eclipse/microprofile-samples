@@ -52,21 +52,7 @@
 
     <profiles>
         <profile>
-            <id>swarm</id>
-            <dependencies>
-                <dependency>
-                    <groupId>org.wildfly.swarm</groupId>
-                    <artifactId>undertow</artifactId>
-                </dependency>
-                <dependency>
-                    <groupId>org.wildfly.swarm</groupId>
-                    <artifactId>jaxrs-cdi</artifactId>
-                </dependency>
-                <dependency>
-                    <groupId>org.wildfly.swarm</groupId>
-                    <artifactId>jaxrs-jsonp</artifactId>
-                </dependency>
-            </dependencies>
+            <id>wildfly-swarm</id>
             <build>
                 <plugins>
                     <plugin>
@@ -79,9 +65,57 @@
                             </properties>
                         </configuration>
                     </plugin>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-surefire-plugin</artifactId>
+                        <version>${version.surefire.plugin}</version>
+                        <configuration>
+                            <skipTests>false</skipTests>
+                            <systemPropertyVariables>
+                                <arquillian.launch>arquillian-wildfly-swarm</arquillian.launch>
+                            </systemPropertyVariables>
+                        </configuration>
+                    </plugin>
                 </plugins>
             </build>
+            <!-- Temporary until 2016.10 released -->
+            <repositories>
+                <repository>
+                    <id>projectodd-snapshots</id>
+                    <name>Project:odd Snapshots from CI</name>
+                    <url>https://repository-projectodd.forge.cloudbees.com/snapshot</url>
+                    <releases>
+                        <enabled>false</enabled>
+                    </releases>
+                    <snapshots>
+                        <enabled>true</enabled>
+                    </snapshots>
+                </repository>
+            </repositories>
+            <pluginRepositories>
+                <pluginRepository>
+                    <id>projectodd-snapshots</id>
+                    <name>Project:odd Snapshots from CI</name>
+                    <url>https://repository-projectodd.forge.cloudbees.com/snapshot</url>
+                    <releases>
+                        <enabled>false</enabled>
+                    </releases>
+                    <snapshots>
+                        <enabled>true</enabled>
+                    </snapshots>
+                </pluginRepository>
+            </pluginRepositories>
+            <dependencies>
+                <dependency>
+                    <groupId>org.wildfly.swarm</groupId>
+                    <artifactId>microprofile</artifactId>
+                </dependency>
+                <dependency>
+                    <groupId>org.wildfly.swarm</groupId>
+                    <artifactId>arquillian</artifactId>
+                    <scope>test</scope>
+                </dependency>
+            </dependencies>
         </profile>
-
     </profiles>
 </project>

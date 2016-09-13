@@ -18,6 +18,7 @@ To build these examples you can just :
 
 These examples use Arquillian Tests. By default, Arquillian uses WildFly embedded, but other forms of containers can also be plugged in.
  
+* `mvn clean test -Pwildfly-swarm`  tests against a WildFly Swarm
 * `mvn clean test -Parquillian-wildfly-managed`  tests against an embedded WildFly
 * `mvn clean test -Parquillian-wildfly-remote` tests against a running WildFly
 * `mvn clean test -Parquillian-tomee-managed`  tests against an embedded Apache TomEE
@@ -51,6 +52,6 @@ These examples use Arquillian Tests. By default, Arquillian uses WildFly embedde
    
 Package the samples with WildFly Swarm using the following Maven command :    
 
-* `mvn clean package -Pswarm` 
+* `mvn clean package -Pwildfly-swarm` 
 
 This will create an executable Jar under the `target` directory. Just execute it with `java -jar target/microprofile-sample-canonical-swarm.jar` and invoke the microservice at http://localhost:8081/msTopCDs
