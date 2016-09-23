@@ -40,12 +40,14 @@ import io.swagger.jaxrs.config.BeanConfig;
 import io.swagger.jaxrs.listing.ApiListingResource;
 import io.swagger.jaxrs.listing.SwaggerSerializers;
 
+import javax.enterprise.context.ApplicationScoped;
 import javax.ws.rs.ApplicationPath;
 import javax.ws.rs.core.Application;
 import java.util.HashSet;
 import java.util.Set;
 
 @ApplicationPath("/")
+@ApplicationScoped
 public class RestApplication extends Application {
 
     public RestApplication() {
@@ -56,19 +58,9 @@ public class RestApplication extends Application {
         beanConfig.setSchemes(new String[]{"http"});
         beanConfig.setHost("localhost:8080/msTopCDs");
         beanConfig.setBasePath("/");
-        beanConfig.setResourcePackage("org.agoncal.application.topcds.rest");
+        beanConfig.setResourcePackage("io.microprofile.sample.swagger.rest");
         beanConfig.setPrettyPrint(true);
         beanConfig.setScan(true);
     }
 
-    @Override
-    public Set<Class<?>> getClasses() {
-        final Set<Class<?>> resources = new HashSet();
-
-        resources.add(TopCDsEndpoint.class);
-        resources.add(ApiListingResource.class);
-        resources.add(SwaggerSerializers.class);
-
-        return resources;
-    }
 }

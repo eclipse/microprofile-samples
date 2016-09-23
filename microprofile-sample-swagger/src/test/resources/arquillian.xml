@@ -48,6 +48,7 @@
         </configuration>
     </container>
 
+    <container qualifier="arquillian-hammock"/>
     <container qualifier="arquillian-tomee-remote"/>
     <container qualifier="arquillian-tomee-managed">
         <configuration>

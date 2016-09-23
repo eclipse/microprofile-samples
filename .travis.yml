@@ -15,3 +15,5 @@ matrix:
     script: mvn -q install -Parquillian-tomee-managed
   - jdk: oraclejdk8
     script: mvn -q install -Pwildfly-swarm
+  - jdk: oraclejdk8
+    script: mvn -q install -Phammock
