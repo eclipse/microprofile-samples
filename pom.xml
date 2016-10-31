@@ -73,7 +73,7 @@
         <maven.compiler.target>1.8</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <!-- hammock -->
-        <hammock.version>0.3.0</hammock.version>
+        <hammock.version>0.4.0</hammock.version>
         <arquillian-weld-embedded.version>2.0.0.Beta3</arquillian-weld-embedded.version>
         <maven-shade-plugin.version>2.4.3</maven-shade-plugin.version>
         <packaging.type>war</packaging.type>
