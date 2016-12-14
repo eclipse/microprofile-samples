@@ -45,7 +45,7 @@
         <version.swagger>1.5.9</version.swagger>
         <skipLicenseCheck>false</skipLicenseCheck>
         <!--Swarm-->
-        <version.wildfly-swarm>2016.10.0</version.wildfly-swarm>
+        <version.wildfly-swarm>2016.12.0</version.wildfly-swarm>
         <!-- Test -->
         <version.arquillian>1.0.0.Alpha3</version.arquillian>
         <version.arquillian.wildfly.remote>8.2.1.Final</version.arquillian.wildfly.remote>
@@ -78,33 +78,6 @@
         <maven-shade-plugin.version>2.4.3</maven-shade-plugin.version>
         <packaging.type>war</packaging.type>
     </properties>
-    <!-- Temporary until 2016.10 released -->
-    <repositories>
-        <repository>
-            <id>projectodd-snapshots</id>
-            <name>Project:odd Snapshots from CI</name>
-            <url>https://repository-projectodd.forge.cloudbees.com/snapshot</url>
-            <releases>
-                <enabled>false</enabled>
-            </releases>
-            <snapshots>
-                <enabled>true</enabled>
-            </snapshots>
-        </repository>
-    </repositories>
-    <pluginRepositories>
-        <pluginRepository>
-            <id>projectodd-snapshots</id>
-            <name>Project:odd Snapshots from CI</name>
-            <url>https://repository-projectodd.forge.cloudbees.com/snapshot</url>
-            <releases>
-                <enabled>false</enabled>
-            </releases>
-            <snapshots>
-                <enabled>true</enabled>
-            </snapshots>
-        </pluginRepository>
-    </pluginRepositories>
     <dependencyManagement>
         <dependencies>
             <!-- JBoss Logging required due to older version from resteasy client -->
@@ -263,6 +236,12 @@
                     <groupId>org.wildfly.swarm</groupId>
                     <artifactId>wildfly-swarm-plugin</artifactId>
                     <version>${version.wildfly-swarm}</version>
+                    <configuration>
+                        <properties>
+                            <swarm.http.port>8081</swarm.http.port>
+                            <swarm.context.path>/msTopCDs</swarm.context.path>
+                        </properties>
+                    </configuration>
                     <executions>
                         <execution>
                             <id>package</id>
@@ -317,6 +296,35 @@
                     </plugin>
                 </plugins>
             </build>
+        </profile>
+        <profile>
+            <id>wildfly-swarm</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-surefire-plugin</artifactId>
+                        <version>${version.surefire.plugin}</version>
+                        <configuration>
+                            <skipTests>false</skipTests>
+                            <systemPropertyVariables>
+                                <arquillian.launch>arquillian-wildfly-swarm</arquillian.launch>
+                            </systemPropertyVariables>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+            <dependencies>
+                <dependency>
+                    <groupId>org.wildfly.swarm</groupId>
+                    <artifactId>microprofile</artifactId>
+                </dependency>
+                <dependency>
+                    <groupId>org.wildfly.swarm</groupId>
+                    <artifactId>arquillian</artifactId>
+                    <scope>test</scope>
+                </dependency>
+            </dependencies>
         </profile>
         <profile>
             <id>arquillian-wildfly-remote</id>
