@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-  ~ Copyright (C) 2016 Microprofile.io and Contributors
+  ~ Copyright (C) 2016, 2017 Antonio Goncalves and others.
   ~
   ~ Licensed under the Apache License, Version 2.0 (the "License");
   ~ you may not use this file except in compliance with the License.
@@ -23,13 +23,12 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <groupId>io.microprofile.sample</groupId>
+        <groupId>org.eclipse.microprofile.sample</groupId>
         <artifactId>parent</artifactId>
         <version>1.0.0-SNAPSHOT</version>
     </parent>
 
     <artifactId>swagger</artifactId>
-    <version>1.0.0-SNAPSHOT</version>
     <packaging>${packaging.type}</packaging>
     <name>Microprofile Samples :: Swagger</name>
 
