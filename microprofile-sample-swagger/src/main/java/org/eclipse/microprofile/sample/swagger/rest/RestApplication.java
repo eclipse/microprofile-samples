@@ -36,7 +36,7 @@ public class RestApplication extends Application {
         beanConfig.setTitle("TOP CDs");
         beanConfig.setDescription("Gives the TOP selling CDs");
         beanConfig.setVersion("1.0.0");
-        beanConfig.setSchemes(new String[]{"http"});
+        beanConfig.setSchemes(new String[] { "http" });
         beanConfig.setHost("localhost:8080/msTopCDs");
         beanConfig.setBasePath("/");
         beanConfig.setResourcePackage("org.eclipse.microprofile.sample.swagger.rest");

@@ -26,6 +26,6 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
 @Qualifier
 @Retention(RUNTIME)
-@Target({ElementType.METHOD, ElementType.FIELD, ElementType.PARAMETER, ElementType.TYPE})
+@Target({ ElementType.METHOD, ElementType.FIELD, ElementType.PARAMETER, ElementType.TYPE })
 public @interface QLogger {
 }
