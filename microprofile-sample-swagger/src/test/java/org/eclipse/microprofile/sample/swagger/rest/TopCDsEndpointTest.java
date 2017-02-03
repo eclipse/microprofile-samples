@@ -52,7 +52,7 @@ import static org.junit.Assert.assertTrue;
 public class TopCDsEndpointTest {
 
     // ======================================
-    // =          Injection Points          =
+    // = Injection Points =
     // ======================================
 
     @ArquillianResource
@@ -60,34 +60,26 @@ public class TopCDsEndpointTest {
     private Client client;
     private WebTarget webTarget;
 
-
     // ======================================
-    // =         Deployment methods         =
+    // = Deployment methods =
     // ======================================
 
     @Deployment
     public static Archive<?> createDeployment() {
-        if(System.getProperty("arquillian.launch","").equals("arquillian-hammock")) {
-            return ShrinkWrap.create(JavaArchive.class).addClasses(RestApplication.class, TopCDsEndpoint.class,
-                    QLogger.class, ResourceProducer.class);
-        }
-        else {
+        if (System.getProperty("arquillian.launch", "").equals("arquillian-hammock")) {
+            return ShrinkWrap.create(JavaArchive.class)
+                    .addClasses(RestApplication.class, TopCDsEndpoint.class, QLogger.class, ResourceProducer.class);
+        } else {
             // Import Maven runtime dependencies
-            File[] files = Maven.resolver().loadPomFromFile("pom.xml")
-                    .importRuntimeDependencies().resolve().withTransitivity().asFile();
+            File[] files = Maven.resolver().loadPomFromFile("pom.xml").importRuntimeDependencies().resolve().withTransitivity().asFile();
 
-            return ShrinkWrap
-                    .create(WebArchive.class)
-                    .addClass(RestApplication.class)
-                    .addClass(TopCDsEndpoint.class)
-                    .addClass(ResourceProducer.class)
-                    .addAsWebInfResource(EmptyAsset.INSTANCE, "beans.xml")
-                    .addAsLibraries(files);
+            return ShrinkWrap.create(WebArchive.class).addClass(RestApplication.class).addClass(TopCDsEndpoint.class)
+                    .addClass(ResourceProducer.class).addAsWebInfResource(EmptyAsset.INSTANCE, "beans.xml").addAsLibraries(files);
         }
     }
 
     // ======================================
-    // =          Lifecycle methods         =
+    // = Lifecycle methods =
     // ======================================
 
     @Before
@@ -97,7 +89,7 @@ public class TopCDsEndpointTest {
     }
 
     // ======================================
-    // =            Test methods            =
+    // = Test methods =
     // ======================================
 
     @Test

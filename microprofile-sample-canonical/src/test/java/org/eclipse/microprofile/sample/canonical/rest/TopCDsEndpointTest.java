@@ -51,7 +51,7 @@ import static org.junit.Assert.assertTrue;
 public class TopCDsEndpointTest {
 
     // ======================================
-    // =          Injection Points          =
+    // = Injection Points =
     // ======================================
 
     @ArquillianResource
@@ -59,24 +59,17 @@ public class TopCDsEndpointTest {
     private Client client;
     private WebTarget webTarget;
 
-
     // ======================================
-    // =         Deployment methods         =
+    // = Deployment methods =
     // ======================================
     @Deployment
     public static Archive<?> archive() {
-        if(System.getProperty("arquillian.launch","").equals("arquillian-hammock")) {
-            return ShrinkWrap.create(JavaArchive.class).addClasses(RestApplication.class, TopCDsEndpoint.class,
-                    QLogger.class, ResourceProducer.class);
-        }
-        else {
-            return ShrinkWrap
-                    .create(WebArchive.class)
-                    .addClass(RestApplication.class)
-                    .addClass(TopCDsEndpoint.class)
-                    .addClass(ResourceProducer.class)
-                    .addAsWebInfResource(new FileAsset(new File("src/main/webapp/WEB-INF/beans.xml")),
-                            "beans.xml");
+        if (System.getProperty("arquillian.launch", "").equals("arquillian-hammock")) {
+            return ShrinkWrap.create(JavaArchive.class)
+                    .addClasses(RestApplication.class, TopCDsEndpoint.class, QLogger.class, ResourceProducer.class);
+        } else {
+            return ShrinkWrap.create(WebArchive.class).addClass(RestApplication.class).addClass(TopCDsEndpoint.class)
+                    .addClass(ResourceProducer.class).addAsWebInfResource(new FileAsset(new File("src/main/webapp/WEB-INF/beans.xml")), "beans.xml");
         }
     }
 
@@ -87,7 +80,7 @@ public class TopCDsEndpointTest {
     }
 
     // ======================================
-    // =            Test methods            =
+    // = Test methods =
     // ======================================
 
     @Test
