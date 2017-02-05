@@ -1,28 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-  ~ Copyright (C) 2016 Microprofile.io and Contributors
-  ~
-  ~ Licensed under the Apache License, Version 2.0 (the "License");
-  ~ you may not use this file except in compliance with the License.
-  ~ You may obtain a copy of the License at
-  ~
-  ~ http://www.apache.org/licenses/LICENSE-2.0
-  ~
-  ~ Unless required by applicable law or agreed to in writing, software
-  ~ distributed under the License is distributed on an "AS IS" BASIS,
-  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or
-  ~ implied.
-  ~
-  ~ See the License for the specific language governing permissions and
-  ~ limitations under the License.
-  -->
 
+    Copyright (C) 2016, 2017 Antonio Goncalves and others.
+
+    Licensed under the Apache License, Version 2.0 (the "License");
+    you may not use this file except in compliance with the License.
+    You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or
+    implied.
+
+    See the License for the specific language governing permissions and
+    limitations under the License.
+
+-->
 <project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
-         xmlns="http://maven.apache.org/POM/4.0.0">
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
+    xmlns="http://maven.apache.org/POM/4.0.0">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>io.microprofile.sample</groupId>
+    <groupId>org.eclipse.microprofile.sample</groupId>
     <artifactId>parent</artifactId>
     <version>1.0.0-SNAPSHOT</version>
     <packaging>pom</packaging>
@@ -30,7 +31,7 @@
 
     <inceptionYear>2016</inceptionYear>
     <organization>
-        <name>Microprofile.io</name>
+        <name>Eclipse Microprofile</name>
         <url>http://www.microprofile.io</url>
     </organization>
 
@@ -44,7 +45,7 @@
         <version.resteasy>3.0.18.Final</version.resteasy>
         <version.swagger>1.5.9</version.swagger>
         <skipLicenseCheck>false</skipLicenseCheck>
-        <!--Swarm-->
+        <!--Swarm -->
         <version.wildfly-swarm>2016.12.0</version.wildfly-swarm>
         <!-- Test -->
         <version.arquillian>1.0.0.Alpha3</version.arquillian>
@@ -65,6 +66,7 @@
         <version.install.plugin>2.5.2</version.install.plugin>
         <version.jar.plugin>3.0.2</version.jar.plugin>
         <version.license.plugin>1.9</version.license.plugin>
+        <version.formatter.plugin>0.5.2</version.formatter.plugin>
         <version.surefire.plugin>2.19.1</version.surefire.plugin>
         <version.war.plugin>2.6</version.war.plugin>
         <version.processor.plugin>3.1.0</version.processor.plugin>
@@ -80,7 +82,8 @@
     </properties>
     <dependencyManagement>
         <dependencies>
-            <!-- JBoss Logging required due to older version from resteasy client -->
+            <!-- JBoss Logging required due to older version from resteasy 
+                client -->
             <dependency>
                 <groupId>org.jboss.logging</groupId>
                 <artifactId>jboss-logging</artifactId>
@@ -251,6 +254,18 @@
                         </execution>
                     </executions>
                 </plugin>
+                <plugin>
+                    <groupId>net.revelc.code</groupId>
+                    <artifactId>formatter-maven-plugin</artifactId>
+                    <version>${version.formatter.plugin}</version>
+                    <executions>
+                        <execution>
+                            <goals>
+                                <goal>format</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                </plugin>
             </plugins>
         </pluginManagement>
     </build>
@@ -280,6 +295,8 @@
                             <skip>${skipLicenseCheck}</skip>
                             <excludes>
                                 <exclude>**/target/</exclude>
+                                <exclude>**/src/format/</exclude>
+                                <exclude>**/src/license/</exclude>
                                 <exclude>.editorconfig</exclude>
                                 <exclude>.travis.yml</exclude>
                                 <exclude>README.md</exclude>
@@ -293,6 +310,64 @@
                                 </goals>
                             </execution>
                         </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+        <profile>
+            <id>updateHeaders</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>com.mycila</groupId>
+                        <artifactId>license-maven-plugin</artifactId>
+                        <version>3.0</version>
+                        <executions>
+                            <execution>
+                                <goals>
+                                    <goal>check</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                        <configuration>
+                            <header>src/license/header.txt</header>
+                            <properties>
+                                <authors>Antonio Goncalves and others</authors>
+                                <currentYear>2017</currentYear>
+                            </properties>
+                            <skip>${skipLicenseCheck}</skip>
+                            <excludes>
+                                <exclude>**/*.adoc</exclude>
+                                <exclude>**/*.launch</exclude>
+                                <exclude>**/*.sh</exclude>
+                                <exclude>**/.editorconfig</exclude>
+                                <exclude>**/LICENSE.txt</exclude>
+                                <exclude>**/README</exclude>
+                                <exclude>**/settings.xml</exclude>
+                                <exclude>src/format/**</exclude>
+                                <exclude>src/license/**</exclude>
+                            </excludes>
+                            <headerDefinitions>
+                                <headerDefinition>src/license/headers.xml</headerDefinition>
+                            </headerDefinitions>
+                            <mapping>
+                                <java>JAVA_STYLE</java>
+                            </mapping>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+        <profile>
+            <id>formatCode</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>net.revelc.code</groupId>
+                        <artifactId>formatter-maven-plugin</artifactId>
+                        <configuration>
+                            <configFile>../src/format/eclipse-formatter-config.xml</configFile>
+                        </configuration>
                     </plugin>
                 </plugins>
             </build>
@@ -526,11 +601,14 @@
                                     <shadedArtifactAttached>true</shadedArtifactAttached>
                                     <shadedClassifierName>hammock</shadedClassifierName>
                                     <transformers>
-                                        <transformer implementation="org.apache.maven.plugins.shade.resource.ServicesResourceTransformer"/>
-                                        <transformer implementation="org.apache.maven.plugins.shade.resource.AppendingTransformer">
+                                        <transformer
+                                            implementation="org.apache.maven.plugins.shade.resource.ServicesResourceTransformer" />
+                                        <transformer
+                                            implementation="org.apache.maven.plugins.shade.resource.AppendingTransformer">
                                             <resource>META-INF/cxf/bus-extensions.txt</resource>
                                         </transformer>
-                                        <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
+                                        <transformer
+                                            implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
                                             <mainClass>org.jboss.weld.environment.se.StartMain</mainClass>
                                         </transformer>
                                     </transformers>

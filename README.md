@@ -14,6 +14,12 @@ To build these examples you can just :
 * `mvn clean install` does not run any test
 * `mvn clean install -Plicense,skipTests` checks the licenses and does not run any test
 
+## Formatting Code
+
+To format / re-format code call :
+
+* `mvn clean compile -PformatCode` formats the source code and does not run any test
+
 ## Testing 
 
 These examples use Arquillian Tests. By default, Arquillian uses WildFly embedded, but other forms of containers can also be plugged in.
