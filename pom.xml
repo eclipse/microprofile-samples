@@ -23,15 +23,15 @@
     xmlns="http://maven.apache.org/POM/4.0.0">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>org.eclipse.microprofile.sample</groupId>
+    <groupId>io.microprofile.sample</groupId>
     <artifactId>parent</artifactId>
-    <version>1.0.0-SNAPSHOT</version>
+    <version>1.0.0</version>
     <packaging>pom</packaging>
-    <name>Microprofile Samples</name>
+    <name>MicroProfile Samples</name>
 
     <inceptionYear>2016</inceptionYear>
     <organization>
-        <name>Eclipse Microprofile</name>
+        <name>Eclipse MicroProfile</name>
         <url>http://www.microprofile.io</url>
     </organization>
 
@@ -41,7 +41,7 @@
     </modules>
 
     <properties>
-        <version.javaee>7.0</version.javaee>
+        <version.microprofile>1.0.0</version.microprofile>
         <version.resteasy>3.0.18.Final</version.resteasy>
         <version.swagger>1.5.9</version.swagger>
         <skipLicenseCheck>false</skipLicenseCheck>
@@ -89,12 +89,12 @@
                 <artifactId>jboss-logging</artifactId>
                 <version>${version.jboss-logging}</version>
             </dependency>
-            <!-- JAVA EE -->
+            <!-- MicroProfile -->
             <dependency>
-                <groupId>javax</groupId>
-                <artifactId>javaee-api</artifactId>
-                <version>${version.javaee}</version>
-                <scope>provided</scope>
+                <groupId>io.microprofile</groupId>
+                <artifactId>microprofile</artifactId>
+                <version>${version.microprofile}</version>
+                <type>pom</type>
             </dependency>
 
             <!-- WILDFLY SWARM -->
@@ -147,6 +147,32 @@
             </dependency>
         </dependencies>
     </dependencyManagement>
+
+    <!-- Additional repositories -->
+    <!-- Helps to resolve Parent POM and Snapshot artifacts -->
+    <repositories>
+        <repository>
+            <id>jcenter</id>
+            <name>JCenter</name>
+            <url>http://jcenter.bintray.com</url>
+        </repository>
+        <repository>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+            <id>bintray-release</id>
+            <name>libs-release</name>
+            <url>http://oss.jfrog.org/artifactory/libs-release</url>
+        </repository>
+        <repository>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+            <id>bintray-snapshot</id>
+            <name>libs-snapshot</name>
+            <url>http://oss.jfrog.org/artifactory/libs-snapshot</url>
+        </repository>
+    </repositories>
 
     <build>
         <pluginManagement>
