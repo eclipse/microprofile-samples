@@ -4,7 +4,7 @@
 
 Give different samples on the Micro Profile : 
 
-* **Canonical** Simplest sample using JAX-RS 2.0 / CDI 1.2 / JSon-P 1.0
+* **Canonical** Simplest sample using JAX-RS 2.0.1 / CDI 1.2 / JSon-P 1.0
 * **Swagger** Adding Swagger to the canonical sample 
 
 ## Building
@@ -13,6 +13,22 @@ To build these examples you can just :
 
 * `mvn clean install` does not run any test
 * `mvn clean install -Plicense,skipTests` checks the licenses and does not run any test
+
+### Repositories
+
+Currently the MicroProfile 1.0.0 BOM is available in the **JCenter** public repository, so please for now have a repository tag like
+
+```
+   <repositories>
+        <repository>
+            <id>jcenter</id>
+            <name>JCenter</name>
+            <url>http://jcenter.bintray.com</url>
+        </repository>
+     [...]
+```
+
+included in your Maven POM or equivalent if you use the MicroProfile BOM like these samples.
 
 ## Formatting Code
 
