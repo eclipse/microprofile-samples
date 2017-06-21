@@ -1,0 +1,22 @@
+Portions of this software were originally based on the following:
+* microprofile.io samples
+  https://github.com/microprofile/microprofile-samples
+  under Apache License, v2.0
+
+SPDXVersion: SPDX-2.1
+PackageName: Eclipse Microprofile
+PackageHomePage: http://www.eclipse.org/microprofile
+PackageLicenseDeclared: Apache-2.0
+
+PackageCopyrightText: <text>
+Antonio Goncalves antonio.goncalves@gmail.com,
+Werner Keil werner.keil@gmail.com,
+Ken Finnigan ken@kenfinnigan.me,
+John Ament john.d.ament@gmail.com,
+Andy Gumbrecht agumbrecht@tomitribe.com,
+Charles Moulliard ch007m@gmail.com,
+Steve Millidge steve.millidge@payara.fish,
+Martijn Verburg martijnverburg@gmail.com,
+Ivan St. Ivanov ivan.st.ivanov@gmail.com,
+Kevin Sutter kwsutter@gmail.com
+</text>

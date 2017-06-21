@@ -1,0 +1,83 @@
+//
+// Copyright (c) 2017-2017 Contributors to the Eclipse Foundation
+//
+// See the NOTICE file(s) distributed with this work for additional
+// information regarding copyright ownership.
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//     http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+//
+// SPDX-License-Identifier: Apache-2.0
+
+# Micro Profile - Samples
+
+## Purpose of these samples
+
+Give different samples on the Micro Profile :
+
+* **Canonical** Simplest sample using JAX-RS 2.0 / CDI 1.2 / JSON-P 1.0
+* **Swagger** Adding Swagger to the canonical sample
+
+## Building
+
+To build these examples you can just :
+
+* `mvn clean install` does not run any test
+* `mvn clean install -Plicense,skipTests` checks the licenses and does not run any test
+
+## Formatting Code
+
+To format / re-format code call :
+
+* `mvn clean compile -PformatCode` formats the source code and does not run any test
+
+## Testing
+
+These examples use Arquillian Tests. By default, Arquillian uses WildFly embedded, but other forms of containers can also be plugged in.
+
+* `mvn clean test -Pwildfly-swarm`  tests against a WildFly Swarm
+* `mvn clean test -Parquillian-wildfly-managed`  tests against an embedded WildFly
+* `mvn clean test -Parquillian-wildfly-remote` tests against a running WildFly
+* `mvn clean test -Parquillian-tomee-managed`  tests against an embedded Apache TomEE
+* `mvn clean test -Parquillian-tomee-remote` tests against a remote Apache TomEE
+
+## Running
+
+You can package a war file and deploy it on your application server. Once deployed and up and running, just go to `http://localhost:<portNumber>/msTopCDs` to invoke the microservice. You should get a list of random "Top Rated CDs" in JSon format, such as :
+
+    [
+        {
+            id: 1101
+        },
+        {
+            id: 1147
+        },
+        {
+            id: 1112
+        },
+        {
+            id: 1132
+        },
+        {
+            id: 1168
+        }
+     ]
+
+But you can also use other forms of packaging to execute this services
+
+### WildFly Swarm
+
+Package the samples with WildFly Swarm using the following Maven command :
+
+* `mvn clean package -Pwildfly-swarm`
+
+This will create an executable Jar under the `target` directory. Just execute it with `java -jar target/microprofile-sample-canonical-swarm.jar` and invoke the microservice at http://localhost:8081/msTopCDs
