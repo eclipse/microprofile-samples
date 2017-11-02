@@ -56,17 +56,12 @@ public class HealthEndpoint {
     private List<Integer> getRandomNumbers() {        
         final List<Integer> randomCDs = new ArrayList<>();
         final Random r = new Random();
-        randomCDs.add(r.nextInt(100) + 1101);
-        randomCDs.add(r.nextInt(100) + 1101);
-        randomCDs.add(r.nextInt(100) + 1101);
-        randomCDs.add(r.nextInt(100) + 1101);
-        randomCDs.add(r.nextInt(100) + 1101);
+        for (int i=0; i < r.nextInt(); i++) {
+            randomCDs.add(i + 1101);
+        }
 
         logger.info("Top CDs are " + randomCDs);
 
         return randomCDs;
-        
-        // Empty result for DOWN
-//        return Collections.EMPTY_LIST;
     }
 }
