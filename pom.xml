@@ -308,6 +308,7 @@
                             <skip>${skipLicenseCheck}</skip>
                             <excludes>
                                 <exclude>**/target/</exclude>
+                                 <exclude>**/META-INF/services/</exclude>
                                 <exclude>**/src/format/</exclude>
                                 <exclude>**/src/license/</exclude>
                                 <exclude>.editorconfig</exclude>
