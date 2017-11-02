@@ -50,7 +50,7 @@ public class HealthEndpoint {
         } else {
             response = HealthCheckResponse.named(NAME).down().build();
         }
-        return response.getState().name();
+        return response.toString();
     }
 
     private List<Integer> getRandomNumbers() {        

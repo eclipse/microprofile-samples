@@ -90,11 +90,16 @@ public class CanonicalHealthCheckResponseProvider implements HealthCheckResponse
             private final boolean up;
             private final Map<String, Object> data;
 
-            public Response(String name, boolean up, Map<String, Object> map)
-            {
+            public Response(String name, boolean up, Map<String, Object> map) {
                 this.name = name;
                 this.up = up;
                 this.data = setData(map);
+            }
+
+            @Override
+            public String toString() {
+                return "Response [" + name + "=" + getState() + 
+                        (data!= null ? ", data=" + data : "") + "]";
             }
 
             private Map<String,Object> setData(Map<String, Object> map) {
