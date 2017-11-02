@@ -28,7 +28,7 @@
 
     <groupId>org.eclipse.microprofile.sample</groupId>
     <artifactId>parent</artifactId>
-    <version>1.0.0</version>
+    <version>1.2-SNAPSHOT</version>
     <packaging>pom</packaging>
     <name>Microprofile Samples</name>
 
@@ -44,7 +44,7 @@
     </modules>
 
     <properties>
-        <version.microprofile>1.0.0</version.microprofile>
+        <version.microprofile>1.2</version.microprofile>
         <version.javaee>7.0</version.javaee>
         <version.resteasy>3.0.18.Final</version.resteasy>
         <version.swagger>1.5.9</version.swagger>
@@ -96,7 +96,7 @@
             
             <!-- MicroProfile BOM -->
             <dependency>
-                <groupId>io.microprofile</groupId>
+                <groupId>org.eclipse.microprofile</groupId>
                 <artifactId>microprofile</artifactId>
                 <version>${version.microprofile}</version>
                 <type>pom</type>
