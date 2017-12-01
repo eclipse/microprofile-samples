@@ -52,7 +52,7 @@ These examples use Arquillian Tests. By default, Arquillian uses WildFly embedde
 
 ## Running
 
-You can package a war file and deploy it on your application server. Once deployed and up and running, just go to `http://localhost:<portNumber>/msTopCDs` to invoke the microservice. You should get a list of random "Top Rated CDs" in JSON format, such as :
+You can package a WAR file and deploy it on your application server. Once deployed and up and running, just go to `http://localhost:<portNumber>/msTopCDs` to invoke the microservice. You should get a list of random "Top Rated CDs" in JSON format, such as :
 
     [
         {
