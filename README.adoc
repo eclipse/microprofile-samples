@@ -18,11 +18,11 @@
 //
 // SPDX-License-Identifier: Apache-2.0
 
-# Micro Profile - Samples
+# MicroProfile - Samples
 
 ## Purpose of these samples
 
-Give different samples on the Micro Profile :
+Give different examples using the MicroProfile :
 
 * **Canonical** Simplest sample using JAX-RS 2.0 / CDI 1.2 / JSON-P 1.0
 * **Swagger** Adding Swagger to the canonical sample
@@ -52,7 +52,7 @@ These examples use Arquillian Tests. By default, Arquillian uses WildFly embedde
 
 ## Running
 
-You can package a war file and deploy it on your application server. Once deployed and up and running, just go to `http://localhost:<portNumber>/msTopCDs` to invoke the microservice. You should get a list of random "Top Rated CDs" in JSon format, such as :
+You can package a WAR file and deploy it on your application server. Once deployed and up and running, just go to `http://localhost:<portNumber>/msTopCDs` to invoke the microservice. You should get a list of random "Top Rated CDs" in JSON format, such as :
 
     [
         {
@@ -80,4 +80,4 @@ Package the samples with WildFly Swarm using the following Maven command :
 
 * `mvn clean package -Pwildfly-swarm`
 
-This will create an executable Jar under the `target` directory. Just execute it with `java -jar target/microprofile-sample-canonical-swarm.jar` and invoke the microservice at http://localhost:8081/msTopCDs
+This will create an executable JAR under the `target` directory. Just execute it with `java -jar target/microprofile-sample-canonical-swarm.jar` and invoke the microservice at http://localhost:8081/msTopCDs
