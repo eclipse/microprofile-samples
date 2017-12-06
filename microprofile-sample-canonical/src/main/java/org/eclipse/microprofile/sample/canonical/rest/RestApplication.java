@@ -1,9 +1,8 @@
 /*
- * Copyright (C) 2016, 2017 Antonio Goncalves and others.
+ * Copyright (c) 2016, 2017 Contributors to the Eclipse Foundation
  *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
+ * See the NOTICE file(s) distributed with this work for additional
+ * information regarding copyright ownership.
  *
  * http://www.apache.org/licenses/LICENSE-2.0
  *

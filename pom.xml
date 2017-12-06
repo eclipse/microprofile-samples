@@ -3,7 +3,7 @@
 /**********************************************************************
  * Copyright (c) 2017 Contributors to the Eclipse Foundation
  *
- * See the NOTICES file(s) distributed with this work for additional
+ * See the NOTICE file(s) distributed with this work for additional
  * information regarding copyright ownership.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -28,7 +28,7 @@
 
     <groupId>org.eclipse.microprofile.sample</groupId>
     <artifactId>parent</artifactId>
-    <version>1.0.0-SNAPSHOT</version>
+    <version>1.2-SNAPSHOT</version>
     <packaging>pom</packaging>
     <name>Microprofile Samples</name>
 
@@ -44,6 +44,7 @@
     </modules>
 
     <properties>
+        <version.microprofile>1.2</version.microprofile>
         <version.javaee>7.0</version.javaee>
         <version.resteasy>3.0.18.Final</version.resteasy>
         <version.swagger>1.5.9</version.swagger>
@@ -92,6 +93,15 @@
                 <artifactId>jboss-logging</artifactId>
                 <version>${version.jboss-logging}</version>
             </dependency>
+            
+            <!-- MicroProfile BOM -->
+            <dependency>
+                <groupId>org.eclipse.microprofile</groupId>
+                <artifactId>microprofile</artifactId>
+                <version>${version.microprofile}</version>
+                <type>pom</type>
+            </dependency>
+            
             <!-- JAVA EE -->
             <dependency>
                 <groupId>javax</groupId>
@@ -298,6 +308,7 @@
                             <skip>${skipLicenseCheck}</skip>
                             <excludes>
                                 <exclude>**/target/</exclude>
+                                 <exclude>**/META-INF/services/</exclude>
                                 <exclude>**/src/format/</exclude>
                                 <exclude>**/src/license/</exclude>
                                 <exclude>.editorconfig</exclude>

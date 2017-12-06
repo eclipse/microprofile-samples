@@ -18,13 +18,12 @@ package org.eclipse.microprofile.sample.canonical.rest;
 
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
-import javax.json.Json;
-import javax.json.JsonArrayBuilder;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
+import org.eclipse.microprofile.health.HealthCheckResponse;
 import org.eclipse.microprofile.sample.canonical.utils.QLogger;
 
 import java.util.ArrayList;
@@ -32,9 +31,9 @@ import java.util.List;
 import java.util.Random;
 import java.util.logging.Logger;
 
-@Path("/")
+@Path("/health")
 @RequestScoped
-public class TopCDsEndpoint {
+public class HealthEndpoint {
 
     @Inject
     @QLogger
@@ -42,24 +41,24 @@ public class TopCDsEndpoint {
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public String getTopCDs() {
-
-        final JsonArrayBuilder array = Json.createArrayBuilder();
+    public String getHealthStatus() {
+        final String NAME = "CDs";
+        HealthCheckResponse response;
         final List<Integer> randomCDs = getRandomNumbers();
-        for (final Integer randomCD : randomCDs) {
-            array.add(Json.createObjectBuilder().add("id", randomCD));
+        if (randomCDs.size() > 0) {
+            response = HealthCheckResponse.named(NAME).up().build();
+        } else {
+            response = HealthCheckResponse.named(NAME).down().build();
         }
-        return array.build().toString();
+        return response.toString();
     }
 
-    private List<Integer> getRandomNumbers() {
+    private List<Integer> getRandomNumbers() {        
         final List<Integer> randomCDs = new ArrayList<>();
         final Random r = new Random();
-        randomCDs.add(r.nextInt(100) + 1101);
-        randomCDs.add(r.nextInt(100) + 1101);
-        randomCDs.add(r.nextInt(100) + 1101);
-        randomCDs.add(r.nextInt(100) + 1101);
-        randomCDs.add(r.nextInt(100) + 1101);
+        for (int i=0; i < r.nextInt(); i++) {
+            randomCDs.add(i + 1101);
+        }
 
         logger.info("Top CDs are " + randomCDs);
 
