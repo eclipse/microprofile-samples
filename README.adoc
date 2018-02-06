@@ -18,6 +18,8 @@
 //
 // SPDX-License-Identifier: Apache-2.0
 
+image:https://badges.gitter.im/eclipse/microprofile-samples.svg[link="https://gitter.im/eclipse/microprofile-samples"]
+
 # MicroProfile - Samples
 
 ## Purpose of these samples
