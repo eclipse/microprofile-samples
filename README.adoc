@@ -31,6 +31,10 @@ Give different examples using the MicroProfile :
 
 ## Building
 
+Clone the git repository:
+
+* `git clone https://github.com/eclipse/microprofile-samples.git`
+
 To build these examples you can just :
 
 * `mvn clean install` does not run any test
