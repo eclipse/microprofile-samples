@@ -28,6 +28,7 @@ Give different examples using the MicroProfile :
 
 * **Canonical** Simplest sample using JAX-RS 2.0 / CDI 1.2 / JSON-P 1.0
 * **Swagger** Adding Swagger to the canonical sample
+* **Config** Sample for MicroProfile Config
 
 ## Building
 

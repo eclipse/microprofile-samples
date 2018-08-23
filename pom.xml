@@ -41,12 +41,14 @@
     <modules>
         <module>microprofile-sample-canonical</module>
         <module>microprofile-sample-swagger</module>
+        <module>microprofile-sample-config</module>
     </modules>
 
     <properties>
         <version.javaee>7.0</version.javaee>
         <version.resteasy>3.0.18.Final</version.resteasy>
         <version.swagger>1.5.9</version.swagger>
+        <version.microprofile-config>1.2</version.microprofile-config>
         <skipLicenseCheck>false</skipLicenseCheck>
         <!--Swarm -->
         <version.wildfly-swarm>2016.12.0</version.wildfly-swarm>
@@ -78,7 +80,7 @@
         <maven.compiler.target>1.8</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <!-- hammock -->
-        <hammock.version>0.4.0</hammock.version>
+        <hammock.version>2.1</hammock.version>
         <arquillian-weld-embedded.version>2.0.0.Beta3</arquillian-weld-embedded.version>
         <maven-shade-plugin.version>2.4.3</maven-shade-plugin.version>
         <packaging.type>war</packaging.type>
@@ -107,6 +109,13 @@
                 <version>${version.wildfly-swarm}</version>
                 <type>pom</type>
                 <scope>import</scope>
+            </dependency>
+
+            <!-- Microprofile -->
+            <dependency>
+                <groupId>org.eclipse.microprofile.config</groupId>
+                <artifactId>microprofile-config-api</artifactId>
+                <version>${version.microprofile-config}</version>
             </dependency>
 
             <!-- OTHERS -->
@@ -590,6 +599,24 @@
                             </systemPropertyVariables>
                         </configuration>
                     </plugin>
+                    <!--
+                        Could also be used and does not require that much configuration
+                    <plugin>
+                        <groupId>com.github.chrisdchristo</groupId>
+                        <artifactId>capsule-maven-plugin</artifactId>
+                        <version>1.5.1</version>
+                        <executions>
+                            <execution>
+                                <goals>
+                                    <goal>build</goal>
+                                </goals>
+                                <configuration>
+                                    <appClass>ws.ament.hammock.Bootstrap</appClass>
+                                    <type>fat</type>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>-->
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-shade-plugin</artifactId>
