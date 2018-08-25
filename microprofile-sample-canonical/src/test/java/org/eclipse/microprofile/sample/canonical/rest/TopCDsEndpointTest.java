@@ -17,8 +17,6 @@
  */
 package org.eclipse.microprofile.sample.canonical.rest;
 
-import org.eclipse.microprofile.sample.canonical.rest.RestApplication;
-import org.eclipse.microprofile.sample.canonical.rest.TopCDsEndpoint;
 import org.eclipse.microprofile.sample.canonical.utils.QLogger;
 import org.eclipse.microprofile.sample.canonical.utils.ResourceProducer;
 import org.jboss.arquillian.container.test.api.Deployment;
@@ -66,10 +64,11 @@ public class TopCDsEndpointTest {
     public static Archive<?> archive() {
         if (System.getProperty("arquillian.launch", "").equals("arquillian-hammock")) {
             return ShrinkWrap.create(JavaArchive.class)
-                    .addClasses(RestApplication.class, TopCDsEndpoint.class, QLogger.class, ResourceProducer.class);
+                             .addClasses(RestApplication.class, TopCDsEndpoint.class, QLogger.class, ResourceProducer.class);
         } else {
-            return ShrinkWrap.create(WebArchive.class).addClass(RestApplication.class).addClass(TopCDsEndpoint.class)
-                    .addClass(ResourceProducer.class).addAsWebInfResource(new FileAsset(new File("src/main/webapp/WEB-INF/beans.xml")), "beans.xml");
+            return ShrinkWrap.create(WebArchive.class)
+                             .addClasses(RestApplication.class, TopCDsEndpoint.class, ResourceProducer.class)
+                             .addAsWebInfResource(new FileAsset(new File("src/main/resources/META-INF/beans.xml")), "beans.xml");
         }
     }
 

@@ -19,12 +19,15 @@ package org.eclipse.microprofile.sample.swagger.rest;
 
 import io.swagger.jaxrs.listing.ApiListingResource;
 import io.swagger.jaxrs.listing.SwaggerSerializers;
+import org.apache.deltaspike.core.api.exclude.Exclude;
 
 import javax.enterprise.context.RequestScoped;
 import javax.enterprise.inject.Produces;
+import javax.enterprise.inject.Vetoed;
 import javax.ws.rs.Path;
 
 @RequestScoped
+@Exclude(onExpression = "profile==thorntail-io")
 @Path("/swagger.{type:json|yaml}")
 public class SwaggerApiListing extends ApiListingResource {
     @Produces

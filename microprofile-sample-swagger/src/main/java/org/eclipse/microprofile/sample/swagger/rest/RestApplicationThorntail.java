@@ -17,28 +17,18 @@
  */
 package org.eclipse.microprofile.sample.swagger.rest;
 
-import io.swagger.jaxrs.config.BeanConfig;
 import org.apache.deltaspike.core.api.exclude.Exclude;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.ws.rs.ApplicationPath;
 import javax.ws.rs.core.Application;
 
-@Exclude(onExpression = "profile==thorntail-io")
+@Exclude(onExpression = "profile!=thorntail-io")
 @ApplicationPath("/")
 @ApplicationScoped
-public class RestApplication extends Application {
+public class RestApplicationThorntail extends Application {
 
-    public RestApplication() {
-        final BeanConfig beanConfig = new BeanConfig();
-        beanConfig.setTitle("TOP CDs");
-        beanConfig.setDescription("Gives the TOP selling CDs");
-        beanConfig.setVersion("1.0.0");
-        beanConfig.setSchemes(new String[]{"http"});
-        beanConfig.setHost("localhost:8080/msTopCDs");
-        beanConfig.setBasePath("/");
-        beanConfig.setResourcePackage("org.eclipse.microprofile.sample.swagger.rest");
-        beanConfig.setPrettyPrint(true);
-        beanConfig.setScan(true);
+    public RestApplicationThorntail() {
     }
+
 }

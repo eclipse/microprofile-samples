@@ -22,8 +22,8 @@
  **********************************************************************/
 -->
 <project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
-    xmlns="http://maven.apache.org/POM/4.0.0">
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
+         xmlns="http://maven.apache.org/POM/4.0.0">
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
@@ -37,43 +37,89 @@
     <name>Microprofile Samples :: Swagger</name>
 
     <dependencies>
-        <!-- JBoss Logging required due to older version from resteasy client -->
+        <!-- Java Specifications -->
         <dependency>
-            <groupId>org.jboss.logging</groupId>
-            <artifactId>jboss-logging</artifactId>
+            <groupId>javax.json</groupId>
+            <artifactId>javax.json-api</artifactId>
+            <scope>provided</scope>
         </dependency>
-        <!-- JAVA EE -->
+
         <dependency>
-            <groupId>javax</groupId>
-            <artifactId>javaee-api</artifactId>
+            <groupId>javax.ws.rs</groupId>
+            <artifactId>javax.ws.rs-api</artifactId>
+            <scope>provided</scope>
         </dependency>
-        <!-- OTHERS -->
+
+        <dependency>
+            <groupId>javax.enterprise</groupId>
+            <artifactId>cdi-api</artifactId>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>javax.inject</groupId>
+            <artifactId>javax.inject</artifactId>
+            <scope>provided</scope>
+        </dependency>
+
+        <!-- Swagger -->
         <dependency>
             <groupId>io.swagger</groupId>
             <artifactId>swagger-jaxrs</artifactId>
+            <version>${version.swagger}</version>
+            <scope>provided</scope>
         </dependency>
-        <!-- TEST -->
+
         <dependency>
-            <groupId>net.javacrumbs.json-unit</groupId>
-            <artifactId>json-unit-fluent</artifactId>
+            <groupId>io.swagger</groupId>
+            <artifactId>swagger-annotations</artifactId>
+            <version>${version.swagger}</version>
+            <scope>provided</scope>
         </dependency>
+
+        <!-- Deltaspike -->
+        <dependency>
+            <groupId>org.apache.deltaspike.core</groupId>
+            <artifactId>deltaspike-core-api</artifactId>
+            <scope>compile</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.deltaspike.core</groupId>
+            <artifactId>deltaspike-core-impl</artifactId>
+            <scope>runtime</scope>
+        </dependency>
+
+        <!-- TEST -->
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-databind</artifactId>
+            <scope>test</scope>
         </dependency>
+
         <dependency>
             <groupId>org.jboss.resteasy</groupId>
             <artifactId>resteasy-client</artifactId>
+            <scope>test</scope>
         </dependency>
+
+        <dependency>
+            <groupId>net.javacrumbs.json-unit</groupId>
+            <artifactId>json-unit-fluent</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <scope>test</scope>
+        </dependency>
+
         <dependency>
             <groupId>org.arquillian.universe</groupId>
             <artifactId>arquillian-junit</artifactId>
             <type>pom</type>
             <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
         </dependency>
     </dependencies>
 
@@ -81,30 +127,80 @@
         <finalName>microprofile-sample-swagger</finalName>
     </build>
 
+
     <profiles>
         <profile>
             <id>wildfly-swarm</id>
-            <build>
-                <plugins>
-                    <plugin>
-                        <groupId>org.wildfly.swarm</groupId>
-                        <artifactId>wildfly-swarm-plugin</artifactId>
-                    </plugin>
-                </plugins>
-            </build>
+            <dependencies>
+                <!-- THORNTAIL -->
+                <dependency>
+                    <groupId>io.thorntail</groupId>
+                    <artifactId>cdi</artifactId>
+                </dependency>
+
+                <dependency>
+                    <groupId>io.thorntail</groupId>
+                    <artifactId>logging</artifactId>
+                </dependency>
+
+                <dependency>
+                    <groupId>io.thorntail</groupId>
+                    <artifactId>jsonp</artifactId>
+                </dependency>
+
+                <dependency>
+                    <groupId>io.thorntail</groupId>
+                    <artifactId>jaxrs</artifactId>
+                </dependency>
+
+                <dependency>
+                    <groupId>io.thorntail</groupId>
+                    <artifactId>jaxrs-validator</artifactId>
+                </dependency>
+
+                <dependency>
+                    <groupId>io.thorntail</groupId>
+                    <artifactId>swagger</artifactId>
+                </dependency>
+
+                <!-- TEST -->
+                <dependency>
+                    <groupId>io.thorntail</groupId>
+                    <artifactId>arquillian</artifactId>
+                    <scope>test</scope>
+                </dependency>
+            </dependencies>
         </profile>
+
         <profile>
             <id>hammock</id>
             <dependencies>
+                <!-- OTHERS -->
+                <!-- Hammock needs it at runtime, but needed for compile as well -->
+                <dependency>
+                    <groupId>io.swagger</groupId>
+                    <artifactId>swagger-jaxrs</artifactId>
+                    <scope>compile</scope>
+                </dependency>
+
+                <dependency>
+                    <groupId>com.google.guava</groupId>
+                    <artifactId>guava</artifactId>
+                </dependency>
+
                 <dependency>
                     <groupId>ws.ament.hammock</groupId>
                     <artifactId>dist-microprofile</artifactId>
+                    <scope>runtime</scope>
                 </dependency>
+
+                <!-- TEST -->
                 <dependency>
                     <groupId>ws.ament.hammock</groupId>
                     <artifactId>test-arquillian</artifactId>
                     <scope>test</scope>
                 </dependency>
+
                 <dependency>
                     <groupId>org.jboss.arquillian.container</groupId>
                     <artifactId>arquillian-weld-embedded</artifactId>

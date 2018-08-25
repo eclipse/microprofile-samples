@@ -22,8 +22,8 @@
  **********************************************************************/
 -->
 <project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
-    xmlns="http://maven.apache.org/POM/4.0.0">
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
+         xmlns="http://maven.apache.org/POM/4.0.0">
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
@@ -37,38 +37,58 @@
     <name>Microprofile Samples :: Canonical</name>
 
     <dependencies>
-        <!-- JBoss Logging required due to older version from resteasy client -->
+        <!-- MicroProfile Specifications -->
+
+        <!-- Java Specifications -->
         <dependency>
-            <groupId>org.jboss.logging</groupId>
-            <artifactId>jboss-logging</artifactId>
+            <groupId>javax.json</groupId>
+            <artifactId>javax.json-api</artifactId>
         </dependency>
-        <!-- JAVA EE -->
+
         <dependency>
-            <groupId>javax</groupId>
-            <artifactId>javaee-api</artifactId>
+            <groupId>javax.ws.rs</groupId>
+            <artifactId>javax.ws.rs-api</artifactId>
         </dependency>
-        <!-- TEST -->
+
+        <dependency>
+            <groupId>javax.enterprise</groupId>
+            <artifactId>cdi-api</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>javax.inject</groupId>
+            <artifactId>javax.inject</artifactId>
+            <scope>provided</scope>
+        </dependency>
+
+        <!-- OTHERS -->
         <dependency>
             <groupId>net.javacrumbs.json-unit</groupId>
             <artifactId>json-unit-fluent</artifactId>
         </dependency>
+
+        <!-- TEST -->
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-databind</artifactId>
         </dependency>
+
         <dependency>
             <groupId>org.jboss.resteasy</groupId>
             <artifactId>resteasy-client</artifactId>
         </dependency>
+
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <scope>test</scope>
+        </dependency>
+
         <dependency>
             <groupId>org.arquillian.universe</groupId>
             <artifactId>arquillian-junit</artifactId>
             <type>pom</type>
             <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
         </dependency>
     </dependencies>
 
@@ -79,14 +99,40 @@
     <profiles>
         <profile>
             <id>wildfly-swarm</id>
-            <build>
-                <plugins>
-                    <plugin>
-                        <groupId>org.wildfly.swarm</groupId>
-                        <artifactId>wildfly-swarm-plugin</artifactId>
-                    </plugin>
-                </plugins>
-            </build>
+            <dependencies>
+                <!-- THORNTAIL -->
+                <dependency>
+                    <groupId>io.thorntail</groupId>
+                    <artifactId>cdi</artifactId>
+                </dependency>
+
+                <dependency>
+                    <groupId>io.thorntail</groupId>
+                    <artifactId>logging</artifactId>
+                </dependency>
+
+                <dependency>
+                    <groupId>io.thorntail</groupId>
+                    <artifactId>jsonp</artifactId>
+                </dependency>
+
+                <dependency>
+                    <groupId>io.thorntail</groupId>
+                    <artifactId>jaxrs</artifactId>
+                </dependency>
+
+                <dependency>
+                    <groupId>io.thorntail</groupId>
+                    <artifactId>jaxrs-validator</artifactId>
+                </dependency>
+
+                <!-- TEST -->
+                <dependency>
+                    <groupId>io.thorntail</groupId>
+                    <artifactId>arquillian</artifactId>
+                    <scope>test</scope>
+                </dependency>
+            </dependencies>
         </profile>
         <profile>
             <id>hammock</id>
@@ -94,12 +140,16 @@
                 <dependency>
                     <groupId>ws.ament.hammock</groupId>
                     <artifactId>dist-microprofile</artifactId>
+                    <scope>runtime</scope>
                 </dependency>
+
+                <!-- TEST -->
                 <dependency>
                     <groupId>ws.ament.hammock</groupId>
                     <artifactId>test-arquillian</artifactId>
                     <scope>test</scope>
                 </dependency>
+
                 <dependency>
                     <groupId>org.jboss.arquillian.container</groupId>
                     <artifactId>arquillian-weld-embedded</artifactId>
