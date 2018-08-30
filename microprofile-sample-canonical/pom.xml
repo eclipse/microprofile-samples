@@ -67,15 +67,24 @@
             <artifactId>json-unit-fluent</artifactId>
         </dependency>
 
-        <!-- TEST -->
+        <!-- Necessary because of JAXRSArchive.class -->
         <dependency>
-            <groupId>com.fasterxml.jackson.core</groupId>
-            <artifactId>jackson-databind</artifactId>
+            <groupId>io.thorntail</groupId>
+            <artifactId>jaxrs</artifactId>
+            <scope>provided</scope>
         </dependency>
 
+        <!-- TEST -->
         <dependency>
             <groupId>org.jboss.resteasy</groupId>
             <artifactId>resteasy-client</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <scope>test</scope>
         </dependency>
 
         <dependency>

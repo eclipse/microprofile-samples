@@ -41,11 +41,12 @@
     <modules>
         <module>microprofile-sample-canonical</module>
         <module>microprofile-sample-swagger</module>
+        <module>microprofile-sample-config</module>
     </modules>
 
     <properties>
         <version.javaee>7.0</version.javaee>
-        <version.resteasy>3.0.18.Final</version.resteasy>
+        <version.resteasy>3.6.1.Final</version.resteasy>
         <version.swagger>1.5.16</version.swagger>
         <skipLicenseCheck>false</skipLicenseCheck>
         <!-- MicroProfile Specifications -->
@@ -57,6 +58,7 @@
         <version.microprofile.restclient>1.0</version.microprofile.restclient>
         <version.microprofile-openapi>1.0.1</version.microprofile-openapi>
         <version.microprofile-opentracing>1.1</version.microprofile-opentracing>
+        <version.microprofile-config-geronimo-impl>1.2</version.microprofile-config-geronimo-impl>
         <!-- Java Specifications -->
         <version.javax-json-api>1.1.2</version.javax-json-api>
         <version.javax.ws-rs-api>2.1</version.javax.ws-rs-api>
@@ -72,8 +74,8 @@
         <version.arquillian.wildfly.managed>8.2.1.Final</version.arquillian.wildfly.managed>
         <version.wildfly>10.1.0.Final</version.wildfly>
         <version.junit>4.12</version.junit>
-        <version.jsonunit>1.12.1</version.jsonunit>
-        <version.jackson>2.3.1</version.jackson>
+        <version.jsonunit>1.31.1</version.jsonunit>
+        <version.jackson>2.9.5</version.jackson>
         <version.tomee>7.0.1</version.tomee>
         <version.el>2.2</version.el>
         <version.jboss-logging>3.3.0.Final</version.jboss-logging>
@@ -116,6 +118,13 @@
                 <scope>provided</scope>
             </dependency>
 
+            <dependency>
+                <groupId>org.apache.geronimo.config</groupId>
+                <artifactId>geronimo-config-impl</artifactId>
+                <version>${version.microprofile-config-geronimo-impl}</version>
+                <scope>runtime</scope>
+            </dependency>
+
             <!-- Java Specifications -->
             <dependency>
                 <groupId>javax.json</groupId>
@@ -142,6 +151,14 @@
                 <groupId>javax.inject</groupId>
                 <artifactId>javax.inject</artifactId>
                 <version>${version.javax.inject}</version>
+                <scope>provided</scope>
+            </dependency>
+
+            <!-- Jackson JSON -->
+            <dependency>
+                <groupId>com.fasterxml.jackson.core</groupId>
+                <artifactId>jackson-annotations</artifactId>
+                <version>${version.jackson}</version>
                 <scope>provided</scope>
             </dependency>
 
@@ -218,18 +235,28 @@
                 <version>${version.resteasy}</version>
                 <scope>test</scope>
             </dependency>
+
+            <dependency>
+                <groupId>org.jboss.resteasy</groupId>
+                <artifactId>resteasy-jackson2-provider</artifactId>
+                <version>${version.resteasy}</version>
+                <scope>test</scope>
+            </dependency>
+
             <dependency>
                 <groupId>junit</groupId>
                 <artifactId>junit</artifactId>
                 <version>${version.junit}</version>
                 <scope>test</scope>
             </dependency>
+
             <dependency>
                 <groupId>net.javacrumbs.json-unit</groupId>
                 <artifactId>json-unit-fluent</artifactId>
                 <version>${version.jsonunit}</version>
                 <scope>test</scope>
             </dependency>
+
             <dependency>
                 <groupId>com.fasterxml.jackson.core</groupId>
                 <artifactId>jackson-databind</artifactId>
@@ -454,6 +481,7 @@
                         <artifactId>thorntail-maven-plugin</artifactId>
                         <version>${version.thorntail-io}</version>
                         <configuration>
+                            <fractionDetectMode>force</fractionDetectMode>
                         </configuration>
                         <executions>
                             <execution>
@@ -475,6 +503,7 @@
                                 <profile>thorntail-io</profile>
                                 <swarm.bind.address>localhost</swarm.bind.address>
                                 <swarm.http.port>8080</swarm.http.port>
+                                <swarm.project.stage>test</swarm.project.stage>
                             </systemPropertyVariables>
                         </configuration>
                     </plugin>
@@ -578,6 +607,7 @@
                             <skipTests>false</skipTests>
                             <systemPropertyVariables>
                                 <arquillian.launch>arquillian-tomee-managed</arquillian.launch>
+                                <profile>thorntail-io</profile>
                             </systemPropertyVariables>
                         </configuration>
                     </plugin>

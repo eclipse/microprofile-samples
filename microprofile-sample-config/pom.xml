@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
 /**********************************************************************
- * Copyright (c) 2017 Contributors to the Eclipse Foundation
+ * Copyright (c) 2018 Contributors to the Eclipse Foundation
  *
  * See the NOTICES file(s) distributed with this work for additional
  * information regarding copyright ownership.
@@ -21,22 +21,29 @@
  * SPDX-License-Identifier: Apache-2.0
  **********************************************************************/
 -->
-<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
-         xmlns="http://maven.apache.org/POM/4.0.0">
-    <modelVersion>4.0.0</modelVersion>
-
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
-        <groupId>org.eclipse.microprofile.sample</groupId>
         <artifactId>parent</artifactId>
+        <groupId>org.eclipse.microprofile.sample</groupId>
         <version>1.0.0-SNAPSHOT</version>
     </parent>
+    <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>swagger</artifactId>
+    <artifactId>config</artifactId>
     <packaging>${packaging.type}</packaging>
-    <name>Microprofile Samples :: Swagger</name>
+    <name>Microprofile Samples :: Config</name>
+
 
     <dependencies>
+        <!-- MicroProfile Specifications -->
+        <dependency>
+            <groupId>org.eclipse.microprofile.config</groupId>
+            <artifactId>microprofile-config-api</artifactId>
+            <scope>provided</scope>
+        </dependency>
+
         <!-- Java Specifications -->
         <dependency>
             <groupId>javax.json</groupId>
@@ -62,32 +69,11 @@
             <scope>provided</scope>
         </dependency>
 
-        <!-- Swagger -->
+        <!-- Jackson JSON -->
         <dependency>
-            <groupId>io.swagger</groupId>
-            <artifactId>swagger-jaxrs</artifactId>
-            <version>${version.swagger}</version>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-annotations</artifactId>
             <scope>provided</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>io.swagger</groupId>
-            <artifactId>swagger-annotations</artifactId>
-            <version>${version.swagger}</version>
-            <scope>provided</scope>
-        </dependency>
-
-        <!-- Deltaspike -->
-        <dependency>
-            <groupId>org.apache.deltaspike.core</groupId>
-            <artifactId>deltaspike-core-api</artifactId>
-            <scope>compile</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>org.apache.deltaspike.core</groupId>
-            <artifactId>deltaspike-core-impl</artifactId>
-            <scope>runtime</scope>
         </dependency>
 
         <!-- Necessary because of JAXRSArchive.class -->
@@ -105,14 +91,8 @@
         </dependency>
 
         <dependency>
-            <groupId>com.fasterxml.jackson.core</groupId>
-            <artifactId>jackson-databind</artifactId>
-            <scope>test</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>net.javacrumbs.json-unit</groupId>
-            <artifactId>json-unit-fluent</artifactId>
+            <groupId>org.jboss.resteasy</groupId>
+            <artifactId>resteasy-jackson2-provider</artifactId>
             <scope>test</scope>
         </dependency>
 
@@ -130,10 +110,10 @@
         </dependency>
     </dependencies>
 
-    <build>
-        <finalName>microprofile-sample-swagger</finalName>
-    </build>
 
+    <build>
+        <finalName>microprofile-sample-config</finalName>
+    </build>
 
     <profiles>
         <profile>
@@ -152,11 +132,6 @@
 
                 <dependency>
                     <groupId>io.thorntail</groupId>
-                    <artifactId>jsonp</artifactId>
-                </dependency>
-
-                <dependency>
-                    <groupId>io.thorntail</groupId>
                     <artifactId>jaxrs</artifactId>
                 </dependency>
 
@@ -167,7 +142,7 @@
 
                 <dependency>
                     <groupId>io.thorntail</groupId>
-                    <artifactId>swagger</artifactId>
+                    <artifactId>microprofile-config</artifactId>
                 </dependency>
 
                 <!-- TEST -->
@@ -178,23 +153,34 @@
                 </dependency>
             </dependencies>
         </profile>
+        <profile>
+            <id>arquillian-tomee-managed</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-surefire-plugin</artifactId>
+                        <version>${version.surefire.plugin}</version>
+                        <configuration>
+                            <systemPropertyVariables>
+                                <allowedUsers>het:het</allowedUsers>
+                                <listAllConfigAllowed>false</listAllConfigAllowed>
+                            </systemPropertyVariables>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
 
+            <dependencies>
+                <dependency>
+                    <groupId>org.apache.geronimo.config</groupId>
+                    <artifactId>geronimo-config-impl</artifactId>
+                </dependency>
+            </dependencies>
+        </profile>
         <profile>
             <id>hammock</id>
             <dependencies>
-                <!-- OTHERS -->
-                <!-- Hammock needs it at runtime, but needed for compile as well -->
-                <dependency>
-                    <groupId>io.swagger</groupId>
-                    <artifactId>swagger-jaxrs</artifactId>
-                    <scope>compile</scope>
-                </dependency>
-
-                <dependency>
-                    <groupId>com.google.guava</groupId>
-                    <artifactId>guava</artifactId>
-                </dependency>
-
                 <dependency>
                     <groupId>ws.ament.hammock</groupId>
                     <artifactId>dist-microprofile</artifactId>
@@ -214,6 +200,21 @@
                     <scope>test</scope>
                 </dependency>
             </dependencies>
+
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-surefire-plugin</artifactId>
+                        <configuration>
+                            <systemPropertyVariables>
+                                <allowedUsers>het:het</allowedUsers>
+                                <listAllConfigAllowed>false</listAllConfigAllowed>
+                            </systemPropertyVariables>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
         </profile>
     </profiles>
 </project>

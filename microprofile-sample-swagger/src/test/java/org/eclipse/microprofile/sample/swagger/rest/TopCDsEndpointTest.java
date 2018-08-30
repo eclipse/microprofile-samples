@@ -33,6 +33,7 @@ import org.jboss.shrinkwrap.resolver.api.maven.Maven;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.wildfly.swarm.jaxrs.JAXRSArchive;
 
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
@@ -82,7 +83,7 @@ public class TopCDsEndpointTest {
             // Import Maven runtime dependencies
             File[] files = Maven.resolver().loadPomFromFile("pom.xml").importCompileAndRuntimeDependencies().resolve().withoutTransitivity().asFile();
 
-            archive = ShrinkWrap.create(WebArchive.class)
+            archive = ShrinkWrap.create(JAXRSArchive.class)
                                 .addClasses(RestApplication.class, TopCDsEndpoint.class, ResourceProducer.class)
                                 .addAsWebInfResource(new FileAsset(new File("src/main/resources/META-INF/beans.xml")), "beans.xml")
                                 .addAsLibraries(files);

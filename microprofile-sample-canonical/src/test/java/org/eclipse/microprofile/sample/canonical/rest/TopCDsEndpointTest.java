@@ -27,10 +27,10 @@ import org.jboss.shrinkwrap.api.Archive;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
 import org.jboss.shrinkwrap.api.asset.FileAsset;
 import org.jboss.shrinkwrap.api.spec.JavaArchive;
-import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.wildfly.swarm.jaxrs.JAXRSArchive;
 
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
@@ -66,7 +66,7 @@ public class TopCDsEndpointTest {
             return ShrinkWrap.create(JavaArchive.class)
                              .addClasses(RestApplication.class, TopCDsEndpoint.class, QLogger.class, ResourceProducer.class);
         } else {
-            return ShrinkWrap.create(WebArchive.class)
+            return ShrinkWrap.create(JAXRSArchive.class)
                              .addClasses(RestApplication.class, TopCDsEndpoint.class, ResourceProducer.class)
                              .addAsWebInfResource(new FileAsset(new File("src/main/resources/META-INF/beans.xml")), "beans.xml");
         }
